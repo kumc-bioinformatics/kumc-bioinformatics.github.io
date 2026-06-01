@@ -1,0 +1,41 @@
+﻿---
+title: "Bioinformatics"
+subtitle: "Department of Biostatistics & Data Science at KU Medical Center"
+page-layout: full
+---
+
+Welcome to the KU Medical Center Department of Biostatistics & Data Science bioinformatics resource hub.
+
+This site provides documentation and guides for bioinformatics workflows, HPC usage, and shared computational resources available to members of the `biostat` partition.
+
+::: callout-important
+## This documentation is only for the `biostat` partition of the KUHPC
+
+Please note that this documentation is only relevant to those within the `biostat` partition. If you are looking for more information about the KUHPC as a whole, users are encouraged to visit the [KUHPC documentation](https://docs.crc.ku.edu/) or email crchelp\@ku.edu
+:::
+
+## Resources
+
+::::: grid
+::: {.g-col-12 .g-col-md-6}
+### [R on HPC](hpc-R.qmd)
+
+Configure R library paths and use shared packages on the KUHPC `biostat` partition.
+:::
+
+::: {.g-col-12 .g-col-md-6}
+### [Shared Resources](hpc-shared-resources.qmd)
+
+Reference genomes, tools, pipelines, and other shared files available on the partition.
+:::
+:::::
+
+## Questions or Requests?
+
+[Submit an issue on GitHub](https://github.com/kumc-bioinformatics/kumc-bioinformatics/issues) to request new resources or report problems.
+
+::: callout-note
+## Acknowledgements
+
+The `biostat` HPC resource is funded by the K-INBRE Data Science Core that is supported in part by the National Institute of General Medical Science award (P20 GM103418), the Biostatistics and Informatics Shared Resource, supported by the National Cancer Institute Cancer Center Support Grant (P30 CA168524), and the Kansas Institute for Precision Medicine COBRE, supported by the National Institute of General Medical Science award P20 GM130423
+:::

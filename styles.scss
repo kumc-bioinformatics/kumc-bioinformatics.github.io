@@ -1,0 +1,55 @@
+/*-- scss:defaults --*/
+
+/*  Primary palette */
+$kumc-navy:   #002B5C;
+$kumc-blue:   #0051A5;
+$kumc-teal:   #007B8A;
+$kumc-light:  #E8F0F7;
+$kumc-white:  #FFFFFF;
+
+/*  Bootstrap variable overrides */
+$primary:          $kumc-navy;
+$secondary:        $kumc-teal;
+$link-color:       $kumc-blue;
+$navbar-bg:        $kumc-navy;
+$navbar-fg:        $kumc-white;
+$footer-bg:        darken($kumc-navy, 5%);
+$body-bg:          $kumc-white;
+$headings-color:   $kumc-navy;
+$code-bg:          $kumc-light;
+$toc-color:        $kumc-blue;
+$toc-active-color: $kumc-teal;
+
+/*  Typography */
+$font-size-base: 1rem;
+$headings-font-weight: 600;
+
+/*-- scss:rules --*/
+
+/*  Custom component styles */
+.navbar-brand img {
+  max-height: 80px;
+}
+
+.quarto-title-block .subtitle {
+  color: $kumc-teal;
+  font-size: 1.1rem;
+}
+
+/* Resource grid cards */
+.grid .g-col-12 h3 a {
+  color: $kumc-blue;
+  text-decoration: none;
+  &:hover { color: $kumc-teal; }
+}
+
+/* Inline code */
+code {
+  color: $kumc-teal;
+  background-color: $kumc-light;
+}
+
+/* Footer */
+.nav-footer {
+  border-top: 3px solid $kumc-teal;
+}
