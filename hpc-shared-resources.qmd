@@ -8,25 +8,19 @@ If you have requests for these resources, or want to suggest an additional resou
 
 In `kuhpc/work/biostat/sw` you can find the following shared resources:
 
--   `tools_software` - Contains conda environments, software, and shared R packages commonly used in the `biostat` partition
-
-    -   `conda`
-
-    -   `standalone_software`
-
-    -   `R_packages`
-
-        -   `4.4`
-
--   `reference_genomes` - Contains reference genomes and various genome builds for different tools organized by model organism
-
-    -   `human`
-
-    -   `mouse`
-
-    -   `golden hamster`
-
--   `internal_pipelines`
+```         
+kuhpc/work/biostat/sw/
+├── tools_software/         # conda envs, software, and shared R packages
+│   ├── conda/
+│   ├── standalone_software/
+│   └── R_packages/
+│       └── 4.4/
+├── reference_genomes/      # reference genomes organized by model organism
+│   ├── human/
+│   ├── mouse/
+│   └── golden_hamster/
+└── internal_pipelines/
+```
 
 ::: callout-note
 ### All HPC Resources
