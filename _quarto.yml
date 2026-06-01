@@ -1,0 +1,36 @@
+project:
+  type: website
+
+website:
+  title: "Bioinformatics"
+  description: "Department of Biostatistics & Data Science bioinformatics resources"
+  navbar:
+    logo: assets/jaydoc.png
+    logo-alt: "KUMC Bioinformatics"
+    title: false
+    background: primary
+    foreground: light
+    left:
+      - href: index.qmd
+        text: Home
+      - href: hpc-R.qmd
+        text: Using `R`
+      - href: hpc-shared-resources.qmd
+        text: Shared Resources
+    right:
+      - icon: github
+        href: https://github.com/kumc-bioinformatics/kumc-bioinformatics
+        aria-label: GitHub
+  page-footer:
+    background: dark
+    center: "Bioinformatics | Department of Biostatistics & Data Science | KU Medical Center"
+
+format:
+  html:
+    theme:
+      - cosmo
+      - styles.scss
+    toc: true
+    toc-depth: 3
+    link-external-icon: true
+    link-external-newwindow: true

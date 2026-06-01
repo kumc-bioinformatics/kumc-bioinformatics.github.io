@@ -1,4 +1,4 @@
-# KUHPC `biostat` Partition Shared Resources
+# `biostat` Partition Shared Resources
 
 In an effort to reduce redundancy and decrease time spent on downloading software and files, the `biostat` partition has created a structured folder to contain shared resources. Users are encouraged to use these as needed. Please note that all files are able to be read and executed but are not open to write permissions.
 
@@ -6,9 +6,9 @@ If you have requests for these resources, or want to suggest an additional resou
 
 ### File Structure
 
-In \`kuhpc/work/biostat/sw\` you can find the following shared resources:
+In `kuhpc/work/biostat/sw` you can find the following shared resources:
 
--   `tools_software`
+-   `tools_software` - Contains conda environments, software, and shared R packages commonly used in the `biostat` partition
 
     -   `conda`
 
@@ -18,7 +18,7 @@ In \`kuhpc/work/biostat/sw\` you can find the following shared resources:
 
         -   `4.4`
 
--   `reference_genomes`
+-   `reference_genomes` - Contains reference genomes and various genome builds for different tools organized by model organism
 
     -   `human`
 
@@ -28,6 +28,8 @@ In \`kuhpc/work/biostat/sw\` you can find the following shared resources:
 
 -   `internal_pipelines`
 
+::: callout-note
 ### All HPC Resources
 
-Along with the resources available in the above file structure, the KUHPC maintains other commonly used softwares. To check what is available, users are encouraged to run `module avail` in their terminal. Further information can be found in the KU CRC HPC documentation website, [linked here](https://docs.crc.ku.edu/software/modules/).
+Along with the resources available in the above file structure, the KUHPC maintains other commonly used software. To check what is available, users are encouraged to run `module avail` in their terminal. Further information can be found in the KU CRC HPC documentation website, [linked here](https://docs.crc.ku.edu/software/modules/).
+:::
