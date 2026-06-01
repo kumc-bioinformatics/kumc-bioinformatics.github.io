@@ -1,0 +1,44 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Bioinformatics",
+    "section": "",
+    "text": "Welcome to the KU Medical Center Department of Biostatistics & Data Science bioinformatics resource hub.\nThis site provides documentation and guides for bioinformatics workflows, HPC usage, and shared computational resources available to members of the biostat partition."
+  },
+  {
+    "objectID": "index.html#resources",
+    "href": "index.html#resources",
+    "title": "Bioinformatics",
+    "section": "Resources",
+    "text": "Resources\n\n\nR on HPC\nConfigure R library paths and use shared packages on the KUHPC biostat partition.\n\n\nShared Resources\nReference genomes, tools, pipelines, and other shared files available on the partition."
+  },
+  {
+    "objectID": "index.html#questions-or-requests",
+    "href": "index.html#questions-or-requests",
+    "title": "Bioinformatics",
+    "section": "Questions or Requests?",
+    "text": "Questions or Requests?\nSubmit an issue on GitHub to request new resources or report problems.\n\n\n\n\n\n\nNoteAcknowledgements\n\n\n\nThe biostat HPC resource is funded by the K-INBRE Data Science Core that is supported in part by the National Institute of General Medical Science award (P20 GM103418), the Biostatistics and Informatics Shared Resource, supported by the National Cancer Institute Cancer Center Support Grant (P30 CA168524), and the Kansas Institute for Precision Medicine COBRE, supported by the National Institute of General Medical Science award P20 GM130423"
+  },
+  {
+    "objectID": "hpc-R.html",
+    "href": "hpc-R.html",
+    "title": "Using R in the HPC",
+    "section": "",
+    "text": "This page details using R in the biostat partition of the KUHPC."
+  },
+  {
+    "objectID": "hpc-R.html#setting-up-library-paths",
+    "href": "hpc-R.html#setting-up-library-paths",
+    "title": "Using R in the HPC",
+    "section": "Setting up library paths",
+    "text": "Setting up library paths\nUsing R in the HPC means having all the libraries installed. Rather than repeatedly installing the same libraries that are commonly used across the biostat partition, we encourage users to set their R_LIBS_SITE to use the shared installed packages and reduce the number that are needed to install in their own individual folder.\n\n\n\n\n\n\nTipBenefit of shared R packages\n\n\n\nUsing the shared R package library means you don’t need to install commonly used packages in your own personal folder. This saves setup time, reduces redundant storage use on the partition, and gives you immediate access to a curated set of packages without any installation steps. This is a benefit to you personally in time saved and to the whole biostat partition in saving memory.\n\n\nUse one of the two following options to use these shared R packages:\n\nUsing R_LIBS_SITE within current environment\nTo use the packages that are already loaded in the shared workspace for the biostat partition, users can set the environment variable called R_LIBS_SITE that will cause R once launched to search in that location for installed packages. This does not preclude your ability to download your own if it is not there, but it will allow you to use usual packages without having to reinstall all of them in your own personal folder. This saves you time and the partition storage. To do this, users must run this command in their environment every time they open a new terminal or connect to a new node.\nexport R_LIBS_SITE=/kuhpc/work/biostat/sw/R/4.4\nUsers can then load R and will have access to the shared packages. If you want to check in your R script, you can run the following command.\n.libPaths()\n\n\n\n\n\n\nWarningThis must be done each new login or node\n\n\n\nWhether you are logging in again or entering a new node for a submitted job, it is necessary to again export the R_LIBS_SITE each time. Otherwise, the script will only look in your own personal library of R packages. If you are having errors due to missing packages, it is always worth checking the above command in R to see whether the library path to the shared R packages is loaded in your environment.\n\n\n\n\nSetting R_LIBS_SITE permanently\nRather than running this command each time, users are encouraged to set this environment variable permanently in a profile file called the .bashrc. For more information about this type of file, here is a general overview of the file type.\nUsers only have to do this process one time. To put this environment variable in your .bashrc, run the following:\nnano ~/.bashrc\nwhich will open the file to edit. You will then paste the following in the file:\nexport R_LIBS_SITE=/kuhpc/work/biostat/sw/R/4.4\nand then close and save the file. If you run cat ~/.bashrc you should see the line that you added. This means that you have successfully added this variable. For this one session, you will need to reload the file to set the environment variable using source ~/.bashrc or reload the terminal. After this time, it will automatically load this variable.\n\n\n\n\n\n\nWarningImportant note for submitted jobs\n\n\n\nIf you set the environment variable in your .bashrc file in this way, you must call your file in the submitted shell script. This would look something like this:\n#!/bin/bash\n#SBATCH --job-name=test_job\n#SBATCH --output=test_job_%j.out\n#SBATCH --error=test_job_%j.err\n#SBATCH --time=01:00:00\n#SBATCH --ntasks=1\n#SBATCH --cpus-per-task=4\n#SBATCH --mem=8G\n\nsource ~/.bashrc\n\nmodule load R\n\nRscript your_r_script.R\nNotice that the user uses the source ~/.bashrc command to ensure that the submitted job uses their saved environment variables, including where the R packages are located."
+  },
+  {
+    "objectID": "hpc-shared-resources.html",
+    "href": "hpc-shared-resources.html",
+    "title": "biostat Partition Shared Resources",
+    "section": "",
+    "text": "biostat Partition Shared Resources\nIn an effort to reduce redundancy and decrease time spent on downloading software and files, the biostat partition has created a structured folder to contain shared resources. Users are encouraged to use these as needed. Please note that all files are able to be read and executed but are not open to write permissions.\nIf you have requests for these resources, or want to suggest an additional resource, please reach out to the Department of Biostatistics & Data Science team by submitting an issue on GitHub.\n\nFile Structure\nIn kuhpc/work/biostat/sw you can find the following shared resources:\n\ntools_software - Contains conda environments, software, and shared R packages commonly used in the biostat partition\n\nconda\nstandalone_software\nR_packages\n\n4.4\n\n\nreference_genomes - Contains reference genomes and various genome builds for different tools organized by model organism\n\nhuman\nmouse\ngolden hamster\n\ninternal_pipelines\n\n\n\n\n\n\n\nNoteAll HPC Resources\n\n\n\nAlong with the resources available in the above file structure, the KUHPC maintains other commonly used software. To check what is available, users are encouraged to run module avail in their terminal. Further information can be found in the KU CRC HPC documentation website, linked here."
+  }
+]
