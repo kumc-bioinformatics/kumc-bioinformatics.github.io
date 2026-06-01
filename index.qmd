@@ -8,7 +8,7 @@ Welcome to the KU Medical Center Department of Biostatistics & Data Science bioi
 
 This site provides documentation and guides for bioinformatics workflows, HPC usage, and shared computational resources available to members of the `biostat` partition.
 
-::: callout-important
+::: callout-warning
 ## This documentation is only for the `biostat` partition of the KUHPC
 
 Please note that this documentation is only relevant to those within the `biostat` partition. If you are looking for more information about the KUHPC as a whole, users are encouraged to visit the [KUHPC documentation](https://docs.crc.ku.edu/) or email crchelp\@ku.edu
