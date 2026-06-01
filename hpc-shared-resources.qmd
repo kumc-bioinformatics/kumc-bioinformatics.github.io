@@ -1,0 +1,33 @@
+# KUHPC `biostat` Partition Shared Resources
+
+In an effort to reduce redundancy and decrease time spent on downloading software and files, the `biostat` partition has created a structured folder to contain shared resources. Users are encouraged to use these as needed. Please note that all files are able to be read and executed but are not open to write permissions.
+
+If you have requests for these resources, or want to suggest an additional resource, please reach out to the Department of Biostatistics & Data Science team by [submitting an issue on GitHub](https://github.com/kumc-bioinformatics/kumc-bioinformatics/issues).
+
+### File Structure
+
+In \`kuhpc/work/biostat/sw\` you can find the following shared resources:
+
+-   `tools_software`
+
+    -   `conda`
+
+    -   `standalone_software`
+
+    -   `R_packages`
+
+        -   `4.4`
+
+-   `reference_genomes`
+
+    -   `human`
+
+    -   `mouse`
+
+    -   `golden hamster`
+
+-   `internal_pipelines`
+
+### All HPC Resources
+
+Along with the resources available in the above file structure, the KUHPC maintains other commonly used softwares. To check what is available, users are encouraged to run `module avail` in their terminal. Further information can be found in the KU CRC HPC documentation website, [linked here](https://docs.crc.ku.edu/software/modules/).
