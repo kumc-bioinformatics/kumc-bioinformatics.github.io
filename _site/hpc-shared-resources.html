@@ -145,24 +145,17 @@ ul.task-list li input[type="checkbox"] {
 <section id="file-structure" class="level3">
 <h3 class="anchored" data-anchor-id="file-structure">File Structure</h3>
 <p>In <code>kuhpc/work/biostat/sw</code> you can find the following shared resources:</p>
-<ul>
-<li><p><code>tools_software</code> - Contains conda environments, software, and shared R packages commonly used in the <code>biostat</code> partition</p>
-<ul>
-<li><p><code>conda</code></p></li>
-<li><p><code>standalone_software</code></p></li>
-<li><p><code>R_packages</code></p>
-<ul>
-<li><code>4.4</code></li>
-</ul></li>
-</ul></li>
-<li><p><code>reference_genomes</code> - Contains reference genomes and various genome builds for different tools organized by model organism</p>
-<ul>
-<li><p><code>human</code></p></li>
-<li><p><code>mouse</code></p></li>
-<li><p><code>golden hamster</code></p></li>
-</ul></li>
-<li><p><code>internal_pipelines</code></p></li>
-</ul>
+<pre><code>kuhpc/work/biostat/sw/
+├── tools_software/         # conda envs, software, and shared R packages
+│   ├── conda/
+│   ├── standalone_software/
+│   └── R_packages/
+│       └── 4.4/
+├── reference_genomes/      # reference genomes organized by model organism
+│   ├── human/
+│   ├── mouse/
+│   └── golden_hamster/
+└── internal_pipelines/</code></pre>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
