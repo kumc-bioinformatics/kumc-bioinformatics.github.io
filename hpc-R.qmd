@@ -1,0 +1,39 @@
+# Using R in the HPC
+
+This page details using R in the `biostat` partition of the KUHPC.
+
+## Setting up library paths
+
+Using R in the HPC means having all the libraries installed. Rather than repeatedly installing the same libraries that are commonly used across the `biostat` partition, we encourage users to set their `R_LIBS_SITE` to use the shared installed packages and reduce the number that are needed to install in their own individual folder. Use the following steps to set this up:
+
+### Using `R_LIBS_SITE` within current environment
+
+To use the packages that are already loaded in the shared workspace for the `biostat` partition, users can set the environment variable called `R_LIBS_SITE` that will cause `R` once launched to search in that location for installed packages. This does not preclude your ability to download your own if it is not there, but it will allow you to use usual packages without having to reinstall all of them in your own personal folder. This saves you time and the partition storage. To do this, users must run this command in their environment **every time they open a new terminal or connect to a new node**.
+
+``` bash
+export R_LIBS_SITE=/kuhpc/work/biostat/sw/R/4.4
+```
+
+Users can then load R and will have access to the shared packages. If you want to check in your R script, you can run the following command.
+
+``` R
+.libPaths()
+```
+
+### Setting `R_LIBS_SITE` permanently
+
+Rather than running this command each time, users are encouraged to set this environment variable permanently in a profile file called the `.bashrc`. For more information about this type of file, here is a [general overview of the file type](https://www.marquette.edu/high-performance-computing/bashrc.php).
+
+Users **only have to do this process one time**. To put this environment variable in your `.bashrc`, run the following:
+
+``` bash
+nano ~/.bashrc
+```
+
+which will open the file to edit. You will then paste the following in the file:
+
+``` bash
+export R_LIBS_SITE=/kuhpc/work/biostat/sw/R/4.4
+```
+
+and then close and save the file. If you run `cat ~/.bashrc` you should see the line that you added. This means that you have successfully added this variable. For this one session, you will need to reload the file to set the environment variable using `source ~/.bashrc` or reload the terminal. After this time, it will automatically load this variable.
