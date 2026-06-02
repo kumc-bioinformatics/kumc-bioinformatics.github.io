@@ -1,5 +1,4 @@
 ﻿---
-s---
 title: "Bioinformatics"
 subtitle: "Department of Biostatistics & Data Science at KU Medical Center"
 page-layout: full

@@ -17,6 +17,8 @@ website:
         text: Using `R`
       - href: hpc-shared-resources.qmd
         text: Shared Resources
+      - href: best-practices.qmd
+        text: Best Practices & Common Pitfalls
     right:
       - icon: github
         href: https://github.com/kumc-bioinformatics/kumc-bioinformatics
