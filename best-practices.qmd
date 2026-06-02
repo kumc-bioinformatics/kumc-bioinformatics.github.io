@@ -1,0 +1,212 @@
+# Best Practices in `biostat` Partition
+
+This page contains best practice suggestions for common usage situations within the `biostat` partition.
+
+## Submitted jobs
+
+A primary way to interact with the HPC is to use submitted jobs. These are done using shell scripting and SLURM. Here, we discuss some common ways to improve reproducibility and efficiency for these jobs.
+
+::: callout-warning
+## Basic introductions to submitted jobs
+
+We assume in this guide that you have already had a basic introduction to the difference between submitted jobs and interactive jobs, the two main ways to interact with resources in the HPC. If you require a refresher on this, we encourage you to review the submit script and submitting job sections in the [Quick Start](https://docs.crc.ku.edu/quick-start/#submit-script) guide. Further information can also be found in the How To section named [Submitting Jobs](https://docs.crc.ku.edu/how-to/submitting-jobs/).
+:::
+
+### Basic Anatomy of a Shell Script
+
+To review, we include a basic template for a shell script of a submitted job here, would would be contained in a file such as `submitted_job.sh`.
+
+``` bash
+#!/bin/bash
+#SBATCH --job-name=serial_job_test    # Job name
+#SBATCH --partition=biostat           # Partition Name (Required)
+#SBATCH --mail-type=ALL               # Mail events (NONE, BEGIN, END, FAIL, ALL)
+#SBATCH --mail-user=email@kumc.edu    # Where to send mail
+#SBATCH --ntasks=1                    # Run on a single CPU
+#SBATCH --mem=1g                      # Job memory request
+#SBATCH --time=0-00:05:00             # Time limit days-hrs:min:sec
+#SBATCH --output=logs/test_%j.log   # Standard output and error log
+
+pwd; hostname; date
+
+module load python/3.6
+
+echo "Running python script"
+
+python /path/to/your/python/script/script.py
+
+date
+```
+
+Note that the beginning of this file is a header which describes the resources you are requesting for your job such as the name of the job, the partition, what email to use and what to send, the memory and time, and the output log name. The `%j` will print the job ID assigned by SLURM in the name of the output log, which is good practice to ensure that the log is not overwritten if you rerun the same submitted job (and you probably will).
+
+After the header, we see that there is a line stating `pwd; hostname; date`. This line will print to the log file the working directory, the specific node that is running the job, and the date and time of the run. This is good practice to ensure you know the parameters of this specific run.
+
+Following this, the script loads the necessary module(s) for the job. In this case, the user simply needs Python. They then use the `echo` command to print a note that the script is starting to run the python script. The script is then run in the next line using the `python` command. All of this allows the user to review what is happening in the log file more easily. Furthermore, if debugging is needed it will be easier to pinpoint where this script failed.
+
+Finally, ending the script with `date` ensures that the date and time are printed again at the end of the run. This makes it possible to review how long the job took within the log script, comparing the first and last date and time printed.
+
+### Tip 1: Always make sure you have the Unix line breaks
+
+Did you know that Windows and LInux operating systems have different invisible line break characters? Just another example of the odd quirks of different OS. This means that if you create your shell script in Windows and then upload it to the HPC, you may get the following error:
+
+::: callout-caution
+## Common error!
+
+The following error indicates that there are Windows line breaks in your file:
+
+``` console
+[user@login1 ~] sbatch test.sh
+sbatch: error: Batch script contains DOS line breaks (\r\n)
+sbatch: error: instead of expected UNIX line breaks (\n).
+```
+:::
+
+There are multiple ways that this can be adjusted. See the following tips and decide which will be the best for you.
+
+::: callout-tip
+## `dos2unix` Command
+
+Once the file is already in the HPC, such as the example above, we can use the Linux command `dos2unix` to convert the file into the proper line breaks.
+
+``` console
+[user@login1 ~] dos2unix test.sh
+dos2unix: converting file test.sh to Unix format...
+```
+
+Once this is complete, there should no longer be errors. However if you remove the file, edit in Windows, and return the file, you will have to do this again. One way to avoid this is to edit within PuTTY or other terminal editor you prefer using the `nano` command. This will open a text-editor in the terminal where you can edit the file in place and retain the proper line breaks.
+
+``` console
+[user@login1 ~] nano test.sh
+```
+:::
+
+::: callout-tip
+## Notepad++ source code editor
+
+Rather than resolving the line ending issue within the terminal, you can avoid this issue in the first place by using the [Notepad++ software](https://notepad-plus-plus.org/) in your home computer. This editor allows you to set the default line break for new files so that all your saved shell scripts will have the proper line break.
+
+Once downloaded, you can set this by going to Settings \> Preferences \> New Document \> Format (Line ending) and select Unix (LF). Now your files will automatically save in the proper format and will be ready to run directly from upload.
+:::
+
+### Tip 2: Threaded jobs
+
+Many of the bioinformatic tools that we use regularly have the ability to "thread" the process. This is a way to split the bigger task into smaller sub-tasks that share the same memory, making the run quicker as it can run multiple processes on different CPUs in the same core. Most tools have a parameter that is called `thread`, `threads`, `-p`, `--threads`, etc. Some of the tools we use that have this option are Bowtie2, SAMtools, and cutadapt.
+
+::: callout-caution
+## Common mistake!
+
+Importantly, if you want to use the threading feature, you need to request the number of `--cpus-per-task` in your shell script to allow the tool to send processes to different CPUs. If you only have one, it does not have the resources to run the jobs in parallel and will either fail or run jobs serially, one after the other.
+:::
+
+The properly threaded shell script will look like the following. Notice that the `-j` parameter in cutadapt represents the number of CPUs available to thread. In this case, we use the variable `${SLURM_CPUS_PER_TASK}`, pulling the number directly from `--cpus-per-task`. This is a good practice, as you will not have to change both values to ensure they are the same if you change the number.
+
+``` bash
+#!/bin/bash
+#SBATCH --job-name=cutadapt
+#SBATCH --partition=biostat
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=email@kumc.edu
+#SBATCH --ntasks=1                    # Run a single task
+#SBATCH --cpus-per-task=4             # Number of CPU cores (threads) for cutadapt
+#SBATCH --mem=4g                      # Memory for the whole job
+#SBATCH --time=0-00:30:00
+#SBATCH --output=logs/cutadapt_%j.log
+pwd; hostname; date
+
+module load cutadapt
+
+echo "Running cutadapt"
+
+cutadapt \
+    -j ${SLURM_CPUS_PER_TASK} \
+    -a AGATCGGAAGAGC \
+    -A AGATCGGAAGAGC \
+    -o /path/to/output/trimmed_R1.fastq.gz \
+    -p /path/to/output/trimmed_R2.fastq.gz \
+    /path/to/input/sample_R1.fastq.gz \
+    /path/to/input/sample_R2.fastq.gz
+
+date
+```
+
+::: callout-note
+## Threaded versus parallelized
+
+Threading and parallelization are related but distinct concepts. **Threading** (also called multi-threading) splits a single job into sub-tasks that run concurrently and share the same memory space. This is what tools like Bowtie2, SAMtools, and cutadapt use when you set `--threads` or `-p`. You request multiple CPUs with `--cpus-per-task`, and the tool handles distributing work across those CPUs internally.
+
+**Parallelization** (job arrays or independent jobs) runs multiple completely separate jobs at the same time, each with their own memory. For example, if you have 20 samples, you could submit a SLURM job array so all 20 run simultaneously instead of one after the other. Each job in the array is independent, and they do not share memory or communicate. This means you can instead request multiple nodes using `--ntasks` as they can be distinct nodes for the independent jobs.
+:::
+
+### Tip 3: To GPU or to not GPU
+
+If a tool offers GPU optimization, use it. If it does not, do not request a GPU.
+
+::: callout-note
+## What is a GPU anyway?
+
+Graphics Processing Units (GPUs) were designed for rendering graphics but excel at running many simple operations simultaneously. This is useful in bioinformatics for tools that can utilize this behavior, or are GPU optimized. When used, this can reduce run time when compared to using CPU. It is important to check the documentation of the tool you are using to determine if it is GPU optimized and, if it is, how to properly indicate to the tool to look for and use the GPU. For more information on this, see the [KUHPC GPU documentation](https://docs.crc.ku.edu/how-to/submitting-jobs/#gpu).
+:::
+
+The `biostat` partition has less GPU nodes than CPU. If your tool does not use GPU and you request one, you are preventing another person from using that GPU, so make sure that it is a resource you need before you request it. Furthermore, it could lead to your job waiting in the queue longer as it thinks it needs this specialized node when in reality you do not.
+
+Below, you can see a shell script that requests a GPU using the `gres` parameter in the header for the `dorado` tool to align Oxford Nanopore data.
+
+``` bash
+#!/bin/bash
+#SBATCH --job-name=dorado_test
+#SBATCH --partition=biostat
+#SBATCH --mail-type=ALL
+#SBATCH --mail-user=email@kumc.edu
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=8             # CPU cores for data loading (automatically detected)
+#SBATCH --gres=gpu:1                  # Request 1 GPU
+#SBATCH --mem=32g
+#SBATCH --time=0-01:00:00
+#SBATCH --output=logs/dorado_%j.log
+
+pwd; hostname; date
+
+module load dorado
+
+echo "Running dorado basecaller on GPU"
+
+dorado basecaller \
+    --device cuda:all \
+    hac \
+    /path/to/input/pod5_dir/ \
+    > /path/to/output/calls.bam
+
+date
+```
+
+::: callout-tip
+## How do I know what resources are available?
+
+A quick way to see what resources are available to you in the `biostat` and `sixhour` partitions, including GPUs, is by using the `crctool` command. Here, you can see an example of what the beginning of that command printout will look like:
+
+``` {.console .console}
+[user@login1 ~]$ crctool
+
+--------------------------------- Partitions -----------------------------------
+|             **(Nodes) Cores / Memory / (G)PU -- Features**                   |
+| biostat                                                                      |
+|       (4)  40 / 192GB      -- avx2,avx512,ib                                 |
+|       (2)  40 / 384GB      -- avx2,avx512,noib                               |
+|       (5)  48 / 128GB      -- avx2,avx512,noib                               |
+|       (1)  48 / 192GB      -- avx2,avx512,noib                               |
+|       (1)  48 / 256GB / 4G -- avx2,avx512,noib,nvidia,a40,single             |
+|                                                                              |
+|       (576) - Cores                                                          |
+|       (2624 GB) - Memory                                                     |
+|       (4) - GPUs                                                             |
+|       (13) - Nodes                                                           |
+| sixhour                                                                      |
+|       (5)  24 / 128GB      -- avx2,noib                                      |
+|       (7)  24 / 192GB / 3G -- avx2,avx512,noib,nvidia,q6000,single           |
+|       (1)  24 / 448GB      -- avx2,noib                                      |
+...
+```
+
+Notice that this lists the number of nodes with the number of cores and memory. The number of those with GPU capability are marked by the section in the center. Here, we can see that there is one node with 48 cores, 256GB RAM, and 4 GPUs.
+:::
