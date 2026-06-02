@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Using R in the HPC – Bioinformatics</title>
+<title>Using Conda Environments in the HPC – Bioinformatics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -130,11 +130,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./hpc-R.html" aria-current="page"> 
+    <a class="nav-link" href="./hpc-R.html"> 
 <span class="menu-text">Using <code>R</code></span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./using-conda.html"> 
+    <a class="nav-link active" href="./using-conda.html" aria-current="page"> 
 <span class="menu-text">Using Conda</span></a>
   </li>  
   <li class="nav-item">
@@ -168,10 +168,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#setting-up-library-paths" id="toc-setting-up-library-paths" class="nav-link active" data-scroll-target="#setting-up-library-paths">Setting up library paths</a>
+  <li><a href="#setting-up-the-conda-environment-variable" id="toc-setting-up-the-conda-environment-variable" class="nav-link active" data-scroll-target="#setting-up-the-conda-environment-variable">Setting up the <code>$CONDA</code> environment variable</a>
   <ul class="collapse">
-  <li><a href="#using-r_libs_site-within-current-environment" id="toc-using-r_libs_site-within-current-environment" class="nav-link" data-scroll-target="#using-r_libs_site-within-current-environment">Using <code>R_LIBS_SITE</code> within current environment</a></li>
-  <li><a href="#setting-r_libs_site-permanently" id="toc-setting-r_libs_site-permanently" class="nav-link" data-scroll-target="#setting-r_libs_site-permanently">Setting <code>R_LIBS_SITE</code> permanently</a></li>
+  <li><a href="#setting-conda-within-the-current-environment" id="toc-setting-conda-within-the-current-environment" class="nav-link" data-scroll-target="#setting-conda-within-the-current-environment">Setting <code>$CONDA</code> within the current environment</a></li>
+  <li><a href="#setting-conda-permanently" id="toc-setting-conda-permanently" class="nav-link" data-scroll-target="#setting-conda-permanently">Setting <code>$CONDA</code> permanently</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -181,7 +181,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Using R in the HPC</h1>
+<h1 class="title">Using Conda Environments in the HPC</h1>
 </div>
 
 
@@ -198,30 +198,32 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>This page details using R in the <code>biostat</code> partition of the KUHPC.</p>
-<section id="setting-up-library-paths" class="level2">
-<h2 class="anchored" data-anchor-id="setting-up-library-paths">Setting up library paths</h2>
-<p>Using R in the HPC means having all the libraries installed. Rather than repeatedly installing the same libraries that are commonly used across the <code>biostat</code> partition, we encourage users to set their <code>R_LIBS_SITE</code> to use the shared installed packages and reduce the number that are needed to install in their own individual folder.</p>
+<p>This page details using shared conda environments in the <code>biostat</code> partition of the KUHPC.</p>
+<section id="setting-up-the-conda-environment-variable" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-the-conda-environment-variable">Setting up the <code>$CONDA</code> environment variable</h2>
+<p>The <code>biostat</code> partition maintains a set of shared conda environments located at <code>/kuhpc/work/biostat/sw/conda/envs</code> that are used for common bioinformatic pipelines and data types. Rather than typing the full path every time you want to activate a shared environment, we encourage users to set a <code>$CONDA</code> environment variable that points to that directory. This lets you activate any shared environment with a short, readable command like:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate <span class="va">$CONDA</span>/name-of-env</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>To see what shared environments are available, visit the <a href="./hpc-shared-resources.html">Shared Resources</a> page.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Benefit of shared R packages
+<span class="screen-reader-only">Tip</span>Benefit of shared conda environments
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Using the shared R package library means you don’t need to install commonly used packages in your own personal folder. This saves setup time, reduces redundant storage use on the partition, and gives you immediate access to a curated set of packages without any installation steps. This is a benefit to you personally in time saved and to the whole <code>biostat</code> partition in saving memory.</p>
+<p>Using shared conda environments means you don’t need to build and maintain your own environment for common workflows. This saves setup time, reduces redundant storage use on the partition, and gives you access to a curated set of tools without any installation steps.</p>
 </div>
 </div>
-<p>Use one of the two following options to use these shared R packages:</p>
-<section id="using-r_libs_site-within-current-environment" class="level3">
-<h3 class="anchored" data-anchor-id="using-r_libs_site-within-current-environment">Using <code>R_LIBS_SITE</code> within current environment</h3>
-<p>To use the packages that are already loaded in the shared workspace for the <code>biostat</code> partition, users can set the environment variable called <code>R_LIBS_SITE</code> that will cause <code>R</code> once launched to search in that location for installed packages. This does not preclude your ability to download your own if it is not there, but it will allow you to use usual packages without having to reinstall all of them in your own personal folder. This saves you time and the partition storage. To do this, users must run this command in their environment every time they open a new terminal or connect to a new node.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">R_LIBS_SITE</span><span class="op">=</span>/kuhpc/work/biostat/sw/R/4.4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Users can then load R and will have access to the shared packages. If you want to check in your R script, you can run the following command.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.libPaths</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Use one of the two following options to set the <code>$CONDA</code> variable:</p>
+<section id="setting-conda-within-the-current-environment" class="level3">
+<h3 class="anchored" data-anchor-id="setting-conda-within-the-current-environment">Setting <code>$CONDA</code> within the current environment</h3>
+<p>To use the shorthand in your current terminal session, run:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">CONDA</span><span class="op">=</span>/kuhpc/work/biostat/sw/conda/envs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>You can then activate any shared environment using just its name:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate <span class="va">$CONDA</span>/name-of-env</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -232,18 +234,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Whether you are logging in again or entering a new node for a submitted job, it is necessary to again export the <code>R_LIBS_SITE</code> each time. Otherwise, the script will only look in your own personal library of R packages. If you are having errors due to missing packages, it is always worth checking the above command in R to see whether the library path to the shared R packages is loaded in your environment.</p>
+<p>Whether you are logging in again or entering a new node for a submitted job, it is necessary to again export <code>$CONDA</code> each time. Otherwise, you will need to use the full path. If you are seeing errors like “environment not found,” it is always worth checking whether <code>$CONDA</code> is set by running <code>echo $CONDA</code>.</p>
 </div>
 </div>
 </section>
-<section id="setting-r_libs_site-permanently" class="level3">
-<h3 class="anchored" data-anchor-id="setting-r_libs_site-permanently">Setting <code>R_LIBS_SITE</code> permanently</h3>
-<p>Rather than running this command each time, users are encouraged to set this environment variable permanently in a profile file called the <code>.bashrc</code>. For more information about this type of file, here is a <a href="https://www.marquette.edu/high-performance-computing/bashrc.php">general overview of the file type</a>.</p>
-<p>Users <strong>only have to do this process one time</strong>. To put this environment variable in your <code>.bashrc</code>, run the following:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/.bashrc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="setting-conda-permanently" class="level3">
+<h3 class="anchored" data-anchor-id="setting-conda-permanently">Setting <code>$CONDA</code> permanently</h3>
+<p>Rather than running the export command each time, users are encouraged to set this variable permanently in their <code>.bashrc</code> profile file. For more information about this type of file, here is a <a href="https://www.marquette.edu/high-performance-computing/bashrc.php">general overview of the file type</a>.</p>
+<p>Users <strong>only have to do this process one time</strong>. To add this variable to your <code>.bashrc</code>, run the following:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nano</span> ~/.bashrc</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p>which will open the file to edit. You will then paste the following in the file:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">R_LIBS_SITE</span><span class="op">=</span>/kuhpc/work/biostat/sw/R/4.4</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>and then close and save the file. If you run <code>cat ~/.bashrc</code> you should see the line that you added. This means that you have successfully added this variable. For this one session, you will need to reload the file to set the environment variable using <code>source ~/.bashrc</code> or reload the terminal. After this time, it will automatically load this variable.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">CONDA</span><span class="op">=</span>/kuhpc/work/biostat/sw/conda/envs</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>and then close and save the file. If you run <code>cat ~/.bashrc</code> you should see the line that you added. This means that you have successfully added this variable. For this one session, you will need to reload the file to apply the change using <code>source ~/.bashrc</code> or by reopening the terminal. After this, it will automatically be set each time you log in.</p>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -254,22 +256,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If you set the environment variable in your <code>.bashrc</code> file in this way, you must call your file in the submitted shell script. This would look something like this:</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=test_job</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=test_job_%j.out</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=test_job_%j.err</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks=1</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=4</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=8G</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="ex">module</span> load R</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> your_r_script.R</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Notice that the user uses the <code>source ~/.bashrc</code> command to ensure that the submitted job uses their saved environment variables, including where the R packages are located.</p>
+<p>If you set the variable in your <code>.bashrc</code> file, you must source that file in any submitted shell script so the job inherits your environment. You also need to initialize conda before activating an environment. A submitted job would look something like this:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/bash</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --job-name=my_job</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --output=my_job_%j.out</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --error=my_job_%j.err</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --time=01:00:00</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --ntasks=1</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --cpus-per-task=4</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#SBATCH --mem=8G</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> ~/.bashrc</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="ex">conda</span> activate <span class="va">$CONDA</span>/name-of-env</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> your_script.py</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Notice that <code>source ~/.bashrc</code> is called first to load your saved environment variables (including <code>$CONDA</code>) and to initialize conda, before calling <code>conda activate</code>.</p>
 </div>
 </div>
 

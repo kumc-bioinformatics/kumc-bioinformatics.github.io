@@ -50,7 +50,7 @@ Finally, ending the script with `date` ensures that the date and time are printe
 
 Did you know that Windows and LInux operating systems have different invisible line break characters? Just another example of the odd quirks of different OS. This means that if you create your shell script in Windows and then upload it to the HPC, you may get the following error:
 
-::: callout-caution
+::: callout-warning
 ## Common error!
 
 The following error indicates that there are Windows line breaks in your file:
@@ -93,7 +93,7 @@ Once downloaded, you can set this by going to Settings \> Preferences \> New Doc
 
 Many of the bioinformatic tools that we use regularly have the ability to "thread" the process. This is a way to split the bigger task into smaller sub-tasks that share the same memory, making the run quicker as it can run multiple processes on different CPUs in the same core. Most tools have a parameter that is called `thread`, `threads`, `-p`, `--threads`, etc. Some of the tools we use that have this option are Bowtie2, SAMtools, and cutadapt.
 
-::: callout-caution
+::: callout-warning
 ## Common mistake!
 
 Importantly, if you want to use the threading feature, you need to request the number of `--cpus-per-task` in your shell script to allow the tool to send processes to different CPUs. If you only have one, it does not have the resources to run the jobs in parallel and will either fail or run jobs serially, one after the other.

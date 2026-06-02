@@ -1,0 +1,86 @@
+---
+title: "Using Conda Environments in the HPC"
+---
+
+This page details using shared conda environments in the `biostat` partition of the KUHPC.
+
+## Setting up the `$CONDA` environment variable
+
+The `biostat` partition maintains a set of shared conda environments located at `/kuhpc/work/biostat/sw/conda/envs` that are used for common bioinformatic pipelines and data types. Rather than typing the full path every time you want to activate a shared environment, we encourage users to set a `$CONDA` environment variable that points to that directory. This lets you activate any shared environment with a short, readable command like:
+
+``` bash
+conda activate $CONDA/name-of-env
+```
+
+To see what shared environments are available, visit the [Shared Resources](hpc-shared-resources.qmd) page.
+
+::: callout-tip
+## Benefit of shared conda environments
+
+Using shared conda environments means you don't need to build and maintain your own environment for common workflows. This saves setup time, reduces redundant storage use on the partition, and gives you access to a curated set of tools without any installation steps.
+:::
+
+Use one of the two following options to set the `$CONDA` variable:
+
+### Setting `$CONDA` within the current environment
+
+To use the shorthand in your current terminal session, run:
+
+``` bash
+export CONDA=/kuhpc/work/biostat/sw/conda/envs
+```
+
+You can then activate any shared environment using just its name:
+
+``` bash
+conda activate $CONDA/name-of-env
+```
+
+::: callout-warning
+## This must be done each new login or node
+
+Whether you are logging in again or entering a new node for a submitted job, it is necessary to again export `$CONDA` each time. Otherwise, you will need to use the full path. If you are seeing errors like "environment not found," it is always worth checking whether `$CONDA` is set by running `echo $CONDA`.
+:::
+
+### Setting `$CONDA` permanently
+
+Rather than running the export command each time, users are encouraged to set this variable permanently in their `.bashrc` profile file. For more information about this type of file, here is a [general overview of the file type](https://www.marquette.edu/high-performance-computing/bashrc.php).
+
+Users **only have to do this process one time**. To add this variable to your `.bashrc`, run the following:
+
+``` bash
+nano ~/.bashrc
+```
+
+which will open the file to edit. You will then paste the following in the file:
+
+``` bash
+export CONDA=/kuhpc/work/biostat/sw/conda/envs
+```
+
+and then close and save the file. If you run `cat ~/.bashrc` you should see the line that you added. This means that you have successfully added this variable. For this one session, you will need to reload the file to apply the change using `source ~/.bashrc` or by reopening the terminal. After this, it will automatically be set each time you log in.
+
+::: callout-warning
+## Important note for submitted jobs
+
+If you set the variable in your `.bashrc` file, you must source that file in any submitted shell script so the job inherits your environment. You also need to initialize conda before activating an environment. A submitted job would look something like this:
+
+``` bash
+#!/bin/bash
+#SBATCH --job-name=my_job
+#SBATCH --output=my_job_%j.out
+#SBATCH --error=my_job_%j.err
+#SBATCH --time=01:00:00
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem=8G
+
+source ~/.bashrc
+
+conda activate $CONDA/name-of-env
+
+python your_script.py
+```
+
+Notice that `source ~/.bashrc` is called first to load your saved environment variables (including `$CONDA`) and to initialize conda, before calling `conda activate`.
+:::
