@@ -6,11 +6,11 @@ If you have requests for these resources, or want to suggest an additional resou
 
 ### File Structure
 
-In `kuhpc/work/biostat/sw` you can find the following shared resources:
+In `/kuhpc/work/biostat/sw` you can find the following shared resources:
 
 ```         
-kuhpc/work/biostat/sw/
-├── tools_software/         # conda envs, software, and shared R packages
+/kuhpc/work/biostat/sw/
+├── tools_softwares/         # conda envs, software, and shared R packages
 │   ├── conda/
 │   ├── images/
 │   ├── standalone_software/
