@@ -11,7 +11,7 @@
     "href": "index.html#resources",
     "title": "Bioinformatics",
     "section": "Resources",
-    "text": "Resources\n\n\nQuick Start (HPC documentation)\nQuick start guide for using the KUHPC on the KUHPC docs.\n\n\nR on HPC\nConfigure R library paths and use shared packages on the KUHPC biostat partition.\n\n\nShared Resources\nReference genomes, tools, pipelines, and other shared files available on the partition."
+    "text": "Resources\n\n\nQuick Start (HPC documentation)\nQuick start guide for using the KUHPC on the KUHPC docs.\n\n\nR on HPC\nConfigure R library paths and use shared packages on the KUHPC biostat partition.\n\n\nShared Resources\nReference genomes, tools, pipelines, and other shared files available on the partition.\n\n\nBest Practices & Common Pitfalls\nGuidance on writing efficient, reproducible HPC jobs and avoiding common mistakes."
   },
   {
     "objectID": "index.html#questions-or-requests",
