@@ -69,6 +69,12 @@ There are multiple ways that this can be adjusted. See the following tips and de
 
 Once the file is already in the HPC, such as the example above, we can use the Linux command `dos2unix` to convert the file into the proper line breaks.
 
+``` bash
+dos2unix test.sh
+```
+
+You should see the following output:
+
 ``` console
 [user@login1 ~] dos2unix test.sh
 dos2unix: converting file test.sh to Unix format...
@@ -76,8 +82,8 @@ dos2unix: converting file test.sh to Unix format...
 
 Once this is complete, there should no longer be errors. However if you remove the file, edit in Windows, and return the file, you will have to do this again. One way to avoid this is to edit within PuTTY or other terminal editor you prefer using the `nano` command. This will open a text-editor in the terminal where you can edit the file in place and retain the proper line breaks.
 
-``` console
-[user@login1 ~] nano test.sh
+``` bash
+nano test.sh
 ```
 :::
 
@@ -183,7 +189,13 @@ date
 ::: callout-tip
 ## How do I know what resources are available?
 
-A quick way to see what resources are available to you in the `biostat` and `sixhour` partitions, including GPUs, is by using the `crctool` command. Here, you can see an example of what the beginning of that command printout will look like:
+A quick way to see what resources are available to you in the `biostat` and `sixhour` partitions, including GPUs, is by using the `crctool` command.
+
+``` bash
+crctool
+```
+
+Here, you can see an example of what the beginning of that command printout will look like:
 
 ``` {.console .console}
 [user@login1 ~]$ crctool
