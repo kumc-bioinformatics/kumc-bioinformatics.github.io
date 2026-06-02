@@ -1,4 +1,5 @@
 ﻿---
+s---
 title: "Bioinformatics"
 subtitle: "Department of Biostatistics & Data Science at KU Medical Center"
 page-layout: full
@@ -16,7 +17,13 @@ Please note that this documentation is only relevant to those within the `biosta
 
 ## Resources
 
-::::: grid
+:::::: grid
+::: {.g-col-12 .g-col-md-6}
+### [Quick Start (HPC documentation)](https://docs.crc.ku.edu/quick-start/)
+
+Quick start guide for using the KUHPC on the KUHPC docs.
+:::
+
 ::: {.g-col-12 .g-col-md-6}
 ### [R on HPC](hpc-R.qmd)
 
@@ -28,7 +35,7 @@ Configure R library paths and use shared packages on the KUHPC `biostat` partiti
 
 Reference genomes, tools, pipelines, and other shared files available on the partition.
 :::
-:::::
+::::::
 
 ## Questions or Requests?
 
