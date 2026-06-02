@@ -16,7 +16,7 @@ Please note that this documentation is only relevant to those within the `biosta
 
 ## Resources
 
-:::::: grid
+::::::: grid
 ::: {.g-col-12 .g-col-md-6}
 ### [Quick Start (HPC documentation)](https://docs.crc.ku.edu/quick-start/)
 
@@ -34,7 +34,13 @@ Configure R library paths and use shared packages on the KUHPC `biostat` partiti
 
 Reference genomes, tools, pipelines, and other shared files available on the partition.
 :::
-::::::
+
+::: {.g-col-12 .g-col-md-6}
+### [Best Practices & Common Pitfalls](best-practices.qmd)
+
+Guidance on writing efficient, reproducible HPC jobs and avoiding common mistakes.
+:::
+:::::::
 
 ## Questions or Requests?
 
