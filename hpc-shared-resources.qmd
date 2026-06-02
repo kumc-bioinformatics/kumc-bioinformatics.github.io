@@ -12,13 +12,13 @@ In `kuhpc/work/biostat/sw` you can find the following shared resources:
 kuhpc/work/biostat/sw/
 ├── tools_software/         # conda envs, software, and shared R packages
 │   ├── conda/
+│   ├── images/
 │   ├── standalone_software/
 │   └── R_packages/
 │       └── 4.4/
 ├── reference_genomes/      # reference genomes organized by model organism
 │   ├── human/
-│   ├── mouse/
-│   └── golden_hamster/
+│   └── mouse/
 └── internal_pipelines/
 ```
 
