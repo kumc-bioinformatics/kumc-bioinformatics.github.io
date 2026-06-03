@@ -14,10 +14,12 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: hpc-R.qmd
-        text: Using `R`
-      - href: using-conda.qmd
-        text: Using Conda
+      - text: How To
+        menu:
+          - href: hpc-R.qmd
+            text: Using `R`
+          - href: using-conda.qmd
+            text: Using Conda
       - href: hpc-shared-resources.qmd
         text: Shared Resources
       - href: best-practices.qmd

@@ -16,7 +16,7 @@ Please note that this documentation is only relevant to those within the `biosta
 
 ## Resources
 
-::::::: grid
+:::::::: grid
 ::: {.g-col-12 .g-col-md-6}
 ### [Quick Start (HPC documentation)](https://docs.crc.ku.edu/quick-start/)
 
@@ -46,7 +46,7 @@ Reference genomes, tools, pipelines, and other shared files available on the par
 
 Guidance on writing efficient, reproducible HPC jobs and avoiding common mistakes.
 :::
-:::::::
+::::::::
 
 ## Questions or Requests?
 
