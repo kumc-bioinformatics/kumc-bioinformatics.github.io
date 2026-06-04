@@ -21,6 +21,20 @@
     "text": "biostat Partition Shared Resources\nIn an effort to reduce redundancy and decrease time spent on downloading software and files, the biostat partition has created a structured folder to contain shared resources. Users are encouraged to use these as needed. Please note that all files are able to be read and executed but are not open to write permissions.\nIf you have requests for these resources, or want to suggest an additional resource, please reach out to the Department of Biostatistics & Data Science team by submitting an issue on GitHub.\n\nFile Structure\nIn /kuhpc/work/biostat/sw you can find the following shared resources:\n/kuhpc/work/biostat/sw/\n├── tools_softwares/         # conda envs, software, and shared R packages\n│   ├── conda/\n│   ├── images/\n│   ├── standalone_software/\n│   └── R_packages/\n│       └── 4.4/\n├── reference_genomes/      # reference genomes organized by model organism\n│   ├── human/\n│   └── mouse/\n└── internal_pipelines/\n\n\n\n\n\n\nNoteAll HPC Resources\n\n\n\nAlong with the resources available in the above file structure, the KUHPC maintains other commonly used software. To check what is available, users are encouraged to run module avail in their terminal. Further information can be found in the KU CRC HPC documentation website, linked here."
   },
   {
+    "objectID": "hpc-images.html",
+    "href": "hpc-images.html",
+    "title": "Using Shared Singularity Images in the HPC",
+    "section": "",
+    "text": "This page details using shared Singularity images in the biostat partition of the KUHPC."
+  },
+  {
+    "objectID": "hpc-images.html#setting-up-the-singularity-environment-variable",
+    "href": "hpc-images.html#setting-up-the-singularity-environment-variable",
+    "title": "Using Shared Singularity Images in the HPC",
+    "section": "Setting up the $SINGULARITY environment variable",
+    "text": "Setting up the $SINGULARITY environment variable"
+  },
+  {
     "objectID": "best-practices.html",
     "href": "best-practices.html",
     "title": "Best Practices in biostat Partition",

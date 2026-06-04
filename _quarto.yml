@@ -20,6 +20,8 @@ website:
             text: Using `R`
           - href: using-conda.qmd
             text: Using Conda
+          - href: hpc-images.qmd
+            text: Using Singularity Images
       - href: hpc-shared-resources.qmd
         text: Shared Resources
       - href: best-practices.qmd
@@ -30,7 +32,7 @@ website:
         aria-label: GitHub
   page-footer:
     background: dark
-    center: "Bioinformatics | Department of Biostatistics & Data Science | KU Medical Center"
+    center: "<span style='white-space: nowrap;'>Bioinformatics | <a href='https://www.kumc.edu/school-of-medicine/academics/departments/biostatistics-and-data-science.html' style='color: inherit;'>Department of Biostatistics &amp; Data Science</a> | KU Medical Center</span>"
 
 format:
   html:

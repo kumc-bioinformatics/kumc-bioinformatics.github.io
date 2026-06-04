@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>hpc-shared-resources – Bioinformatics</title>
+<title>hpc-images – Bioinformatics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,7 +114,7 @@ ul.task-list li input[type="checkbox"] {
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link active" href="./hpc-shared-resources.html" aria-current="page"> 
+    <a class="nav-link" href="./hpc-shared-resources.html"> 
 <span class="menu-text">Shared Resources</span></a>
   </li>  
   <li class="nav-item">
@@ -144,53 +144,38 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#biostat-partition-shared-resources" id="toc-biostat-partition-shared-resources" class="nav-link active" data-scroll-target="#biostat-partition-shared-resources"><code>biostat</code> Partition Shared Resources</a>
-  <ul class="collapse">
-  <li><a href="#file-structure" id="toc-file-structure" class="nav-link" data-scroll-target="#file-structure">File Structure</a></li>
-  </ul></li>
+  <li><a href="#setting-up-the-singularity-environment-variable" id="toc-setting-up-the-singularity-environment-variable" class="nav-link active" data-scroll-target="#setting-up-the-singularity-environment-variable">Setting up the <code>$SINGULARITY</code> environment variable</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
 
-
-
-
-<section id="biostat-partition-shared-resources" class="level1">
-<h1><code>biostat</code> Partition Shared Resources</h1>
-<p>In an effort to reduce redundancy and decrease time spent on downloading software and files, the <code>biostat</code> partition has created a structured folder to contain shared resources. Users are encouraged to use these as needed. Please note that all files are able to be read and executed but are not open to write permissions.</p>
-<p>If you have requests for these resources, or want to suggest an additional resource, please reach out to the Department of Biostatistics &amp; Data Science team by <a href="https://github.com/kumc-bioinformatics/kumc-bioinformatics/issues">submitting an issue on GitHub</a>.</p>
-<section id="file-structure" class="level3">
-<h3 class="anchored" data-anchor-id="file-structure">File Structure</h3>
-<p>In <code>/kuhpc/work/biostat/sw</code> you can find the following shared resources:</p>
-<pre><code>/kuhpc/work/biostat/sw/
-├── tools_softwares/         # conda envs, software, and shared R packages
-│   ├── conda/
-│   ├── images/
-│   ├── standalone_software/
-│   └── R_packages/
-│       └── 4.4/
-├── reference_genomes/      # reference genomes organized by model organism
-│   ├── human/
-│   └── mouse/
-└── internal_pipelines/</code></pre>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>All HPC Resources
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Along with the resources available in the above file structure, the KUHPC maintains other commonly used software. To check what is available, users are encouraged to run <code>module avail</code> in their terminal. Further information can be found in the KU CRC HPC documentation website, <a href="https://docs.crc.ku.edu/software/modules/">linked here</a>.</p>
-</div>
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Using Shared Singularity Images in the HPC</h1>
 </div>
 
 
-</section>
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<hr>
+<p>This page details using shared Singularity images in the <code>biostat</code> partition of the KUHPC.</p>
+<section id="setting-up-the-singularity-environment-variable" class="level2">
+<h2 class="anchored" data-anchor-id="setting-up-the-singularity-environment-variable">Setting up the <code>$SINGULARITY</code> environment variable</h2>
+
+
 </section>
 
 </main> <!-- /main -->

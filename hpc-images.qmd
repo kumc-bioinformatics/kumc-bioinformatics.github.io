@@ -1,0 +1,9 @@
+---
+
+---
+title: "Using Shared Singularity Images in the HPC"
+---
+
+This page details using shared Singularity images in the `biostat` partition of the KUHPC.
+
+## Setting up the `$SINGULARITY` environment variable
