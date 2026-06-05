@@ -77,6 +77,8 @@ If you set the variable in your `.bashrc` file, you must source that file in any
 
 source ~/.bashrc
 
+ml conda
+
 conda activate $CONDA/name-of-env
 
 python your_script.py
